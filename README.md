@@ -1,12 +1,89 @@
-# React + Vite
+# 🛒 Cloth Selling Ecommerce Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully functional demo ecommerce website built using **React.js**, **React Router**, **Context API**, **Tailwind CSS**, and **DummyJSON API**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+### 👨 Customer Panel
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- View all products
+- View individual product details
+- Add products to cart
+- View and manage cart
+- Customer login system (dummy credentials)
+
+### 👩‍💼 Admin Panel
+
+- Admin login system (dummy credentials)
+- Admin dashboard with statistics
+- Manage orders (demo UI)
+- Protected routes for admin access
+- Sidebar navigation for admin panel
+
+---
+
+## 🧑‍💻 Technologies Used
+
+- React.js (Vite)
+- React Router DOM
+- Context API (for authentication and cart state management)
+- Tailwind CSS (for beautiful responsive design)
+- DummyJSON API (for product data)
+- Simple Dummy Authentication (no real backend)
+
+---
+
+## 🌐 API Reference
+
+Using [DummyJSON API](https://dummyjson.com/)
+
+- Get all products: `https://dummyjson.com/products`
+- Get product by ID: `https://dummyjson.com/products/:id`
+- Search products: `https://dummyjson.com/products/search?q=...`
+- Cart operations: `https://dummyjson.com/carts/1` (demo only)
+
+---
+
+## 🔐 Dummy Login Credentials
+
+### Admin Login
+
+- Username: `admin`
+- Password: `admin123`
+
+### Customer Login
+
+- Username: `customer`
+- Password: `cust123`
+
+---
+
+## 🎨 Color Palette
+
+| Purpose       | Color Name | Color Code | Use For                            |
+| ------------- | ---------- | ---------- | ---------------------------------- |
+| **Primary**   | Indigo     | `#4F46E5`  | Navbar, buttons, headers           |
+| **Secondary** | Sky Blue   | `#0EA5E9`  | Hover effects, secondary buttons   |
+| **Tertiary**  | Light Gray | `#F3F4F6`  | Card backgrounds, section dividers |
+| **Text**      | Dark Gray  | `#111827`  | Main text color                    |
+
+---
+
+## 📂 Project Structure
+
+src/
+│
+├── components/ # Reusable components (Navbar, Sidebar, ProductCard, etc.)
+├── context/ # Context API files (AuthContext, CartContext)
+├── layouts/ # Layouts for customer & admin panels
+├── pages/ # All pages (Customer pages & Admin pages)
+├── routes/ # Route configuration files
+├── App.jsx
+├── main.jsx
+├── index.css
+└── ...
+
+yaml
+Copy code
