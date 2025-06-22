@@ -47,10 +47,10 @@ const Home = () => {
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <div className="relative z-10 max-w-4xl">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            Discover Your Perfect Style
+            Style, Beauty & Taste in One Place
           </h1>
           <p className="text-xl mb-8 text-white">
-            Quality clothing for every occasion at unbeatable prices
+            Fashion, beauty, footwear & food — trusted quality, great prices
           </p>
           <Link 
             to="/products"

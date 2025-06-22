@@ -6,7 +6,7 @@ const Navbar = () => {
          style={{ backgroundColor: '#4F46E5' }}>
       <div className="font-bold text-xl">
         <Link to="/" className="hover:text-[#0EA5E9] transition-colors duration-200">
-          ClothStore
+          GlowCart
         </Link>
       </div>
       

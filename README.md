@@ -85,5 +85,3 @@ src/
 ├── index.css
 └── ...
 
-yaml
-Copy code

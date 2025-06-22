@@ -58,7 +58,7 @@ const Footer = () => {
         {/* Copyright Section */}
         <div className="border-t mt-8 pt-8 text-center" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
           <p className="text-sm" style={{ color: '#F3F4F6' }}>
-            © 2025 ClothStore. All rights reserved.
+            © 2025 GlowCart. All rights reserved.
           </p>
         </div>
       </div>
