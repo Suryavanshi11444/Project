@@ -1,39 +1,45 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isCustomer, setIsCustomer] = useState(false);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
-  // Admin dummy login
-  const loginAsAdmin = (username, password) => {
-    if (username === "admin" && password === "admin123") {
-      setIsAdmin(true);
-      return true;
-    }
-    return false;
+const login = (userData) => {
+  console.log('Logging in user:', userData); 
+  const userWithRole = {
+    ...userData,
+    role: userData.role || 'customer' 
   };
-
-  // Customer dummy login
-  const loginAsCustomer = (username, password) => {
-    if (username === "customer" && password === "cust123") {
-      setIsCustomer(true);
-      return true;
-    }
-    return false;
-  };
+  setUser(userWithRole);
+  localStorage.setItem("user", JSON.stringify(userWithRole));
+  return { success: true };
+};
 
   const logout = () => {
-    setIsAdmin(false);
-    setIsCustomer(false);
+    setUser(null);
+    localStorage.removeItem("user");
   };
 
+  const isAuthenticated = !!user;
+  const isAdmin = () => user?.role === 'admin';
+
   return (
-    <AuthContext.Provider value={{ isAdmin, isCustomer, loginAsAdmin, loginAsCustomer, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, isAuthenticated, isAdmin }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export default AuthProvider;
+export default AuthContext;
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};

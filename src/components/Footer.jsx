@@ -3,7 +3,7 @@ const Footer = () => {
     <footer className="w-full" style={{ backgroundColor: '#4F46E5', color: 'white' }}>
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* About Section */}
+          
           <div>
             <h3 className="text-lg font-bold mb-4">About ClothStore</h3>
             <p className="text-sm opacity-90" style={{ color: '#F3F4F6' }}>
@@ -11,7 +11,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h3 className="text-lg font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
@@ -22,7 +21,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Customer Service */}
           <div>
             <h3 className="text-lg font-bold mb-4">Customer Service</h3>
             <ul className="space-y-2">
@@ -32,7 +30,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Newsletter */}
           <div>
             <h3 className="text-lg font-bold mb-4">Stay Updated</h3>
             <div className="flex">
@@ -55,7 +52,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright Section */}
         <div className="border-t mt-8 pt-8 text-center" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
           <p className="text-sm" style={{ color: '#F3F4F6' }}>
             © 2025 GlowCart. All rights reserved.

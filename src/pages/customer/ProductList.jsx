@@ -14,17 +14,14 @@ const ProductList = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        
-        // Fetch products
+
         const productsResponse = await fetch("https://dummyjson.com/products");
         const productsData = await productsResponse.json();
         setProducts(productsData.products || []);
 
-        // Fetch categories
         const categoriesResponse = await fetch("https://dummyjson.com/products/categories");
         const categoriesData = await categoriesResponse.json();
-        
-        // Ensure categories is an array
+
         if (Array.isArray(categoriesData)) {
           setCategories(categoriesData);
         } else {
@@ -51,7 +48,6 @@ const ProductList = () => {
     return matchesCategory && matchesSearch;
   });
 
-  // Error Boundary
   if (error) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-8 text-center">
@@ -71,7 +67,6 @@ const ProductList = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      {/* Page Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
         <div>
           <h1 className="text-3xl font-bold" style={{ color: '#111827' }}>Our Products</h1>
@@ -91,10 +86,9 @@ const ProductList = () => {
         </Link>
       </div>
 
-      {/* Filters */}
       <div className="mb-8 p-6 rounded-lg" style={{ backgroundColor: '#F3F4F6' }}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Search Input */}
+
           <div>
             <label htmlFor="search" className="block text-sm font-medium mb-1" style={{ color: '#111827' }}>
               Search Products
@@ -110,7 +104,6 @@ const ProductList = () => {
             />
           </div>
 
-          {/* Category Filter */}
           <div>
             <label htmlFor="category" className="block text-sm font-medium mb-1" style={{ color: '#111827' }}>
               Filter by Category
@@ -133,7 +126,6 @@ const ProductList = () => {
             </select>
           </div>
 
-          {/* Sort Filter */}
           <div>
             <label htmlFor="sort" className="block text-sm font-medium mb-1" style={{ color: '#111827' }}>
               Sort By
@@ -153,14 +145,12 @@ const ProductList = () => {
         </div>
       </div>
 
-      {/* Loading State */}
       {loading && (
         <div className="flex justify-center items-center h-64">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2" style={{ borderColor: '#4F46E5' }}></div>
         </div>
       )}
 
-      {/* Empty State */}
       {!loading && filteredProducts.length === 0 && (
         <div className="text-center py-16">
           <div className="text-5xl mb-4" style={{ color: '#F3F4F6' }}>🧐</div>
@@ -182,12 +172,10 @@ const ProductList = () => {
         </div>
       )}
 
-      {/* Product Grid */}
       {!loading && filteredProducts.length > 0 && (
         <>
           <ProductGrid products={filteredProducts} />
-          
-          {/* Pagination */}
+
           <div className="flex justify-between items-center mt-12">
             <div className="text-sm" style={{ color: '#6B7280' }}>
               Showing 1 to {filteredProducts.length} of {filteredProducts.length} products

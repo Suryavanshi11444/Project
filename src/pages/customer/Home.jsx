@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import ProductCard from "../../components/ProductCard";
 
 const Home = () => {
-  // Sample featured products data with real image links
   const featuredProducts = [
     {
       id: 1,
@@ -36,12 +35,11 @@ const Home = () => {
 
   return (
     <div className="pb-16">
-      {/* Hero Section with Background Image */}
       <div 
         className="relative h-[70vh] flex items-center justify-center text-center px-4 bg-cover bg-center"
         style={{ 
           backgroundImage: "url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
-          backgroundColor: '#F3F4F6' // Fallback color
+          backgroundColor: '#F3F4F6' 
         }}
       >
         <div className="absolute inset-0 bg-black opacity-40"></div>
@@ -68,7 +66,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Featured Categories */}
       <div className="max-w-7xl mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold mb-12 text-center" style={{ color: '#111827' }}>
           Shop by Category
@@ -103,7 +100,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Featured Products */}
       <div className="max-w-7xl mx-auto px-4 py-16" style={{ backgroundColor: '#F3F4F6' }}>
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-3xl font-bold" style={{ color: '#111827' }}>
@@ -127,7 +123,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Call to Action */}
       <div className="max-w-7xl mx-auto px-4 py-24 text-center">
         <h2 className="text-3xl font-bold mb-6" style={{ color: '#111827' }}>
           Join Our Newsletter

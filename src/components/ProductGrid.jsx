@@ -4,7 +4,6 @@ const ProductGrid = ({ products }) => {
   return (
     <div className="px-4 py-8">
       <div className="max-w-7xl mx-auto">
-        {/* Optional header section with your color scheme */}
         <div className="mb-8 flex justify-between items-center">
           <h2 className="text-2xl font-bold" style={{ color: '#111827' }}>
             Our Products
@@ -27,14 +26,12 @@ const ProductGrid = ({ products }) => {
           </div>
         </div>
 
-        {/* Main product grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {products.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
 
-        {/* Optional pagination with your color scheme */}
         <div className="mt-12 flex justify-center space-x-2">
           <button className="w-10 h-10 rounded-full flex items-center justify-center font-medium transition-colors duration-200"
                   style={{ 

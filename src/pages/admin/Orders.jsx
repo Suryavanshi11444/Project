@@ -1,5 +1,4 @@
 const Orders = () => {
-  // Sample order data - replace with real data from your API
   const orders = [
     { id: '#1001', customer: 'John Doe', date: '2023-05-15', status: 'Delivered', total: '$125.99' },
     { id: '#1002', customer: 'Jane Smith', date: '2023-05-16', status: 'Shipped', total: '$89.50' },
@@ -19,7 +18,6 @@ const Orders = () => {
 
   return (
     <div className="p-6">
-      {/* Header Section */}
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-2xl font-bold" style={{ color: '#111827' }}>Order Management</h1>
@@ -47,7 +45,6 @@ const Orders = () => {
         </div>
       </div>
 
-      {/* Filters */}
       <div className="flex flex-wrap gap-4 mb-6 p-4 rounded-lg" style={{ backgroundColor: '#F3F4F6' }}>
         <select className="px-3 py-2 rounded-md text-sm" style={{ border: '1px solid #E5E7EB' }}>
           <option>All Statuses</option>
@@ -69,7 +66,6 @@ const Orders = () => {
         />
       </div>
 
-      {/* Orders Table */}
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -116,7 +112,6 @@ const Orders = () => {
         </div>
       </div>
 
-      {/* Pagination */}
       <div className="flex justify-between items-center mt-6">
         <div className="text-sm" style={{ color: '#6B7280' }}>
           Showing 1 to 4 of 4 orders

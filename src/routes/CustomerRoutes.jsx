@@ -1,21 +1,21 @@
 import CustomerLayout from "../layouts/CustomerLayout";
 import Home from "../pages/customer/Home";
 import ProductList from "../pages/customer/ProductList";
-import ProductDetails from "../pages/customer/ProductDetails";
 import Cart from "../pages/customer/Cart";
-import Login from "../pages/Login"; 
-import CustomerLogin from "../pages/CustomerLogin";  // <-- New import
+import CustomerLogin from "../pages/customer/CustomerLogin";
+import CustomerSignup from "../pages/customer/CustomerSignup";
+import ProductDetails from "../pages/customer/ProductDetails";
 
 const CustomerRoutes = {
-  path: "/",
+  path: '/',
   element: <CustomerLayout />,
   children: [
-    { path: "", element: <Home /> },
-    { path: "products", element: <ProductList /> },
-    { path: "products/:id", element: <ProductDetails /> },
-    { path: "cart", element: <Cart /> },
-    { path: "login", element: <Login /> },
-    { path: "customer-login", element: <CustomerLogin /> }, // <-- New route
+    { index: true, element: <Home /> },
+    { path: 'productlist', element: <ProductList /> },
+    { path: 'cart', element: <Cart /> },
+    { path: 'customer/login', element: <CustomerLogin /> },
+    { path: 'customer/signup', element: <CustomerSignup /> },
+     { path: "products/:id", element: <ProductDetails /> },
   ],
 };
 

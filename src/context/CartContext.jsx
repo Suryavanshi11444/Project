@@ -24,4 +24,4 @@ const CartContextProvider = ({ children }) => {
   );
 };
 
-export default CartContextProvider;
+export { CartContextProvider };

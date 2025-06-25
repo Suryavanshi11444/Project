@@ -44,7 +44,6 @@ const ProductDetails = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* Breadcrumb Navigation */}
       <div className="text-sm mb-6" style={{ color: '#6B7280' }}>
         <Link to="/" className="hover:text-[#4F46E5]">Home</Link> / 
         <Link to="/products" className="hover:text-[#4F46E5]"> Products</Link> / 
@@ -52,7 +51,6 @@ const ProductDetails = () => {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Product Images */}
         <div className="lg:w-1/2">
           <div className="bg-white rounded-lg shadow-sm overflow-hidden mb-4" style={{ border: '1px solid #E5E7EB' }}>
             <img 
@@ -78,7 +76,6 @@ const ProductDetails = () => {
           </div>
         </div>
 
-        {/* Product Info */}
         <div className="lg:w-1/2">
           <h1 className="text-3xl font-bold mb-2" style={{ color: '#111827' }}>{product.title}</h1>
           <div className="flex items-center mb-4">
@@ -142,7 +139,6 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      {/* Product Reviews */}
       <div className="mt-16">
         <h2 className="text-2xl font-bold mb-6" style={{ color: '#111827' }}>Customer Reviews</h2>
         <div className="bg-white rounded-lg shadow-sm p-6" style={{ border: '1px solid #E5E7EB' }}>

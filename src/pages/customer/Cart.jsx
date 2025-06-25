@@ -8,7 +8,6 @@ const Cart = () => {
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
-      {/* Header Section */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold" style={{ color: '#111827' }}>Your Shopping Cart</h1>
         <p className="text-sm mt-1" style={{ color: '#6B7280' }}>
@@ -33,7 +32,6 @@ const Cart = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Cart Items */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-sm overflow-hidden">
               <div className="hidden md:grid grid-cols-12 bg-gray-50 p-4 text-sm uppercase tracking-wider" style={{ color: '#6B7280' }}>
@@ -47,7 +45,6 @@ const Cart = () => {
                 {cartItems.map((item) => (
                   <li key={item.id} className="p-4">
                     <div className="grid grid-cols-12 items-center gap-4">
-                      {/* Product Info */}
                       <div className="col-span-5 flex items-center space-x-4">
                         <div className="w-20 h-20 rounded-md overflow-hidden bg-gray-100">
                           <img 
@@ -62,12 +59,10 @@ const Cart = () => {
                         </div>
                       </div>
 
-                      {/* Price */}
                       <div className="col-span-2 text-center" style={{ color: '#111827' }}>
                         ${item.price.toFixed(2)}
                       </div>
 
-                      {/* Quantity */}
                       <div className="col-span-3 flex justify-center">
                         <div className="flex items-center border rounded-md" style={{ borderColor: '#E5E7EB' }}>
                           <button 
@@ -92,7 +87,6 @@ const Cart = () => {
                         </div>
                       </div>
 
-                      {/* Subtotal & Remove */}
                       <div className="col-span-2 flex items-center justify-end space-x-4">
                         <span className="font-medium" style={{ color: '#111827' }}>
                           ${(item.price * item.quantity).toFixed(2)}
@@ -110,7 +104,6 @@ const Cart = () => {
               </ul>
             </div>
 
-            {/* Cart Actions */}
             <div className="flex justify-between mt-6">
               <button 
                 className="px-4 py-2 rounded-md font-medium"
@@ -134,7 +127,6 @@ const Cart = () => {
             </div>
           </div>
 
-          {/* Order Summary */}
           <div>
             <div className="bg-white rounded-lg shadow-sm p-6 sticky top-6">
               <h2 className="text-lg font-bold mb-4" style={{ color: '#111827' }}>Order Summary</h2>
