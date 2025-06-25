@@ -48,18 +48,6 @@ Using [DummyJSON API](https://dummyjson.com/)
 
 ## 🔐 Dummy Login Credentials
 
-### Admin Login
-
-- Username: `admin`
-- Password: `admin123`
-
-### Customer Login
-
-- Username: `customer`
-- Password: `cust123`
-
----
-
 ## 🎨 Color Palette
 
 | Purpose       | Color Name | Color Code | Use For                            |
