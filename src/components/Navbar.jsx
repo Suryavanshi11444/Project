@@ -41,6 +41,7 @@ const Navbar = () => {
         >
           Customer Login
         </Link>
+
       </div>
     </nav>
   );
