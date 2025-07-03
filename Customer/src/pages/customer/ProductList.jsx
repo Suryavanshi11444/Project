@@ -10,8 +10,8 @@ const dummyProducts = [
     category: "girls-clothes",
     price: 799,
     rating: 4.5,
-    image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" // girl dress
-  },
+  image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+    },
   {
     id: 2,
     title: "Boys T-Shirt",
@@ -46,7 +46,7 @@ const dummyProducts = [
     category: "girls-clothes",
     price: 1199,
     rating: 4.6,
-    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" // girl kurti
+    image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" // girl kurti
   },
 ];
 

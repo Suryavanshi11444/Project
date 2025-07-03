@@ -23,7 +23,8 @@ const dummyProducts = [
     category: "boys-clothes",
     price: 499,
     rating: 4.2,
-    image: "https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      image: "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", 
+  
     stock: 15
   },
   {
@@ -33,7 +34,7 @@ const dummyProducts = [
     category: "shoes",
     price: 1499,
     rating: 4.7,
-    image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", // men's shoes
     stock: 8
   },
   {
@@ -43,7 +44,7 @@ const dummyProducts = [
     category: "slippers",
     price: 999,
     rating: 4.4,
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", // women's slippers
     stock: 12
   },
   {
