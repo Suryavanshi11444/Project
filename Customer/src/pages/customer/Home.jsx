@@ -94,12 +94,12 @@ const Home = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-0">
             Featured Products
           </h2>
-          <Link
+          {/* <Link
             to="/products"
             className="px-4 sm:px-6 py-2 rounded-md font-medium text-white bg-[#4F46E5] hover:bg-[#4338CA] transition-colors duration-200 text-center"
           >
             View All
-          </Link>
+          </Link> */}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {featuredProducts.map((product) => (
