@@ -14,7 +14,7 @@ const Home = () => {
       id: 2,
       title: "Elegant Summer Dress",
       price: 49.99,
-      category: "Women's Clothing",
+      category: "Men's shoes",
       thumbnail: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
     },
     {
