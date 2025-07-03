@@ -12,6 +12,7 @@ const AdminSignup = () => {
     confirmPassword: ''
   });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -25,31 +26,43 @@ const AdminSignup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
 
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
+      setLoading(false);
       return;
     }
 
     try {
-      // ✅ Register with role = admin
+      // ✅ Admin registration
       await axios.post("http://localhost:5000/api/auth/register", {
         name: formData.name,
         email: formData.email,
         password: formData.password,
         role: 'admin'
+      }, {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true
       });
 
-      // ✅ Auto login after signup
+      // ✅ Auto login with role
       const res = await axios.post("http://localhost:5000/api/auth/login", {
         email: formData.email,
-        password: formData.password
+        password: formData.password,
+        role: 'admin'
+      }, {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true
       });
 
-      login({ ...res.data.user, token: res.data.token }); // store in context
+      login({ ...res.data.user, token: res.data.token }); // update context
       navigate("/admin/dashboard");
     } catch (err) {
+      console.error("❌ Admin Signup Error:", err);
       setError(err.response?.data?.error || "Admin registration failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -86,9 +99,12 @@ const AdminSignup = () => {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
+                disabled={loading}
+                className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+                  loading ? 'bg-indigo-300' : 'bg-indigo-600 hover:bg-indigo-700'
+                } focus:outline-none`}
               >
-                Register Admin Account
+                {loading ? 'Registering...' : 'Register Admin Account'}
               </button>
             </div>
           </form>
@@ -98,7 +114,7 @@ const AdminSignup = () => {
   );
 };
 
-// Reusable input field component
+// ✅ Reusable input field
 const InputField = ({ label, id, icon, value, onChange, type = "text" }) => (
   <div>
     <label htmlFor={id} className="block text-sm font-medium text-gray-700">{label}</label>

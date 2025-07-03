@@ -7,6 +7,7 @@ import axios from 'axios';
 const CustomerSignup = () => {
   const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -15,29 +16,37 @@ const CustomerSignup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
 
     if (form.password !== form.confirmPassword) {
-      return setError("Passwords do not match");
+      setError("Passwords do not match");
+      setLoading(false);
+      return;
     }
 
     try {
-      // Register the user
+      // ✅ Register with role: customer
       await axios.post("http://localhost:5000/api/auth/register", {
         name: form.name,
         email: form.email,
-        password: form.password
+        password: form.password,
+        role: 'customer'
       });
 
-      // Then login automatically
+      // ✅ Auto login after signup
       const res = await axios.post("http://localhost:5000/api/auth/login", {
         email: form.email,
-        password: form.password
+        password: form.password,
+        role: 'customer'
       });
 
-      login({ ...res.data.user, token: res.data.token, role: "customer" });
+      login({ ...res.data.user, token: res.data.token });
       navigate("/");
     } catch (err) {
+      console.error("Signup error:", err);
       setError(err?.response?.data?.error || "Signup failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -62,89 +71,20 @@ const CustomerSignup = () => {
           )}
 
           <form className="space-y-6" onSubmit={handleSubmit}>
-            {/* Name */}
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaSignature className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  className="py-3 pl-10 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  value={form.name}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+            <InputField label="Full Name" name="name" icon={<FaSignature />} value={form.name} onChange={handleChange} />
+            <InputField label="Email address" name="email" type="email" icon={<FaEnvelope />} value={form.email} onChange={handleChange} />
+            <InputField label="Password" name="password" type="password" icon={<FaLock />} value={form.password} onChange={handleChange} />
+            <InputField label="Confirm Password" name="confirmPassword" type="password" icon={<FaLock />} value={form.confirmPassword} onChange={handleChange} />
 
-            {/* Email */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email address</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaEnvelope className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  className="py-3 pl-10 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  value={form.email}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            {/* Password */}
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaLock className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  className="py-3 pl-10 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  value={form.password}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            {/* Confirm Password */}
-            <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirm Password</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaLock className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  required
-                  className="py-3 pl-10 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  value={form.confirmPassword}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            {/* Submit Button */}
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition"
+                disabled={loading}
+                className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+                  loading ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'
+                } transition`}
               >
-                Create Account
+                {loading ? 'Creating...' : 'Create Account'}
               </button>
             </div>
           </form>
@@ -160,5 +100,24 @@ const CustomerSignup = () => {
     </div>
   );
 };
+
+// 🔄 Reusable input field
+const InputField = ({ label, name, icon, value, onChange, type = "text" }) => (
+  <div>
+    <label htmlFor={name} className="block text-sm font-medium text-gray-700">{label}</label>
+    <div className="mt-1 relative rounded-md shadow-sm">
+      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">{icon}</div>
+      <input
+        id={name}
+        name={name}
+        type={type}
+        required
+        className="py-3 pl-10 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+        value={value}
+        onChange={onChange}
+      />
+    </div>
+  </div>
+);
 
 export default CustomerSignup;
