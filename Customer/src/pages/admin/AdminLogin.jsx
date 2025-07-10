@@ -18,26 +18,28 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post(
+      const response = await axios.post(
         'http://localhost:5000/api/auth/login',
         {
           email,
           password,
-          role: 'admin', // ✅ Important: ensure login uses correct model
+          role: 'admin'  // ✅ Force admin role check
         },
         {
           headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
+          withCredentials: true
         }
       );
 
-      if (res.data.user.role !== 'admin') {
+      const { user, token } = response.data;
+
+      if (user.role !== 'admin') {
         setError('You are not authorized as an admin');
         return;
       }
 
-      login({ ...res.data.user, token: res.data.token });
-      navigate('/admin/dashboard');
+      login({ ...user, token }); // ✅ Set token + user in AuthContext
+      navigate('/admin/dashboard'); // ✅ Redirect to admin dashboard
     } catch (err) {
       console.error('Admin login error:', err);
       setError(err.response?.data?.error || 'Admin login failed');
@@ -107,7 +109,6 @@ const AdminLogin = () => {
   );
 };
 
-// ✅ Reusable input field component
 const InputField = ({ label, id, icon, value, onChange, type = 'text' }) => (
   <div>
     <label htmlFor={id} className="block text-sm font-medium text-gray-700">

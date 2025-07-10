@@ -1,12 +1,58 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Project/
+│
+├── Backend/                    # Node.js + Express + MongoDB (Admin + Customer APIs)
+│   ├── config/
+│   │   └── db.js               # MongoDB connection
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   └── paymentController.js
+│   ├── models/
+│   │   ├── Admin.js
+│   │   ├── Customer.js
+│   │   └── Payment.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   └── paymentRoutes.js
+│   ├── uploads/                # Stores uploaded files (screenshots, etc.)
+│   ├── .env                    # Environment configuration
+│   ├── server.js               # Main Express server file
+│   ├── package.json
+│   └── package-lock.json
+│
+└── Customer/                  # React.js Frontend for both roles
+    └── src/
+        ├── assets/             # Images, icons, etc.
+        ├── components/         # Reusable UI components
+        │   ├── Footer.jsx
+        │   ├── Navbar.jsx
+        │   ├── ProductCard.jsx
+        │   ├── ProductGrid.jsx
+        │   └── Sidebar.jsx
+        ├── context/            # Auth & Cart context
+        │   ├── AuthContext.jsx
+        │   └── CartContext.jsx
+        ├── layouts/            # Page layouts
+        │   ├── AdminLayout.jsx
+        │   └── CustomerLayout.jsx
+        ├── pages/
+        │   ├── admin/
+        │   │   ├── AdminDashboard.jsx
+        │   │   ├── AdminLogin.jsx
+        │   │   ├── AdminSignup.jsx
+        │   │   └── Orders.jsx
+        │   └── customer/
+        │       ├── Cart.jsx
+        │       ├── CustomerLogin.jsx
+        │       ├── CustomerSignup.jsx
+        │       ├── Home.jsx
+        │       ├── ProductDetails.jsx
+        │       └── ProductList.jsx
+        ├── routes/
+        │   ├── adminAuthLoader.jsx
+        │   ├── AdminRoutes.jsx
+        │   ├── CompleteRoutes.jsx
+        │   ├── CustomerRoutes.jsx
+        │   └── ProtectedRoute.jsx
+        ├── App.jsx
+        ├── App.css
+        └── index.js

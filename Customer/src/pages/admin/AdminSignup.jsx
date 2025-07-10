@@ -17,10 +17,10 @@ const AdminSignup = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       [e.target.name]: e.target.value
-    });
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -28,39 +28,47 @@ const AdminSignup = () => {
     setError('');
     setLoading(true);
 
-    if (formData.password !== formData.confirmPassword) {
+    const { name, email, password, confirmPassword } = formData;
+
+    if (password !== confirmPassword) {
       setError('Passwords do not match');
       setLoading(false);
       return;
     }
 
     try {
-      // ✅ Admin registration
-      await axios.post("http://localhost:5000/api/auth/register", {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        role: 'admin'
-      }, {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true
-      });
+      // ✅ Register Admin
+      await axios.post(
+        'http://localhost:5000/api/auth/register',
+        { name, email, password, role: 'admin' },
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true
+        }
+      );
 
-      // ✅ Auto login with role
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
-        email: formData.email,
-        password: formData.password,
-        role: 'admin'
-      }, {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true
-      });
+      // ✅ Auto Login
+      const res = await axios.post(
+        'http://localhost:5000/api/auth/login',
+        { email, password, role: 'admin' },
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true
+        }
+      );
 
-      login({ ...res.data.user, token: res.data.token }); // update context
-      navigate("/admin/dashboard");
+      const { user, token } = res.data;
+
+      if (user.role !== 'admin') {
+        setError('Unauthorized. Not an admin.');
+        return;
+      }
+
+      login({ ...user, token }); // Set context
+      navigate('/admin/dashboard');
     } catch (err) {
       console.error("❌ Admin Signup Error:", err);
-      setError(err.response?.data?.error || "Admin registration failed");
+      setError(err.response?.data?.error || 'Admin registration failed');
     } finally {
       setLoading(false);
     }
@@ -91,10 +99,37 @@ const AdminSignup = () => {
           )}
 
           <form className="space-y-6" onSubmit={handleSubmit}>
-            <InputField label="Full Name" id="name" icon={<FaSignature />} value={formData.name} onChange={handleChange} />
-            <InputField label="Email address" id="email" icon={<FaEnvelope />} value={formData.email} onChange={handleChange} type="email" />
-            <InputField label="Password" id="password" icon={<FaLock />} value={formData.password} onChange={handleChange} type="password" />
-            <InputField label="Confirm Password" id="confirmPassword" icon={<FaLock />} value={formData.confirmPassword} onChange={handleChange} type="password" />
+            <InputField
+              label="Full Name"
+              id="name"
+              icon={<FaSignature />}
+              value={formData.name}
+              onChange={handleChange}
+            />
+            <InputField
+              label="Email address"
+              id="email"
+              type="email"
+              icon={<FaEnvelope />}
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <InputField
+              label="Password"
+              id="password"
+              type="password"
+              icon={<FaLock />}
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <InputField
+              label="Confirm Password"
+              id="confirmPassword"
+              type="password"
+              icon={<FaLock />}
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
 
             <div>
               <button
@@ -114,10 +149,12 @@ const AdminSignup = () => {
   );
 };
 
-// ✅ Reusable input field
-const InputField = ({ label, id, icon, value, onChange, type = "text" }) => (
+// ✅ Reusable InputField Component
+const InputField = ({ label, id, icon, value, onChange, type = 'text' }) => (
   <div>
-    <label htmlFor={id} className="block text-sm font-medium text-gray-700">{label}</label>
+    <label htmlFor={id} className="block text-sm font-medium text-gray-700">
+      {label}
+    </label>
     <div className="mt-1 relative rounded-md shadow-sm">
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         {icon}
@@ -127,9 +164,9 @@ const InputField = ({ label, id, icon, value, onChange, type = "text" }) => (
         name={id}
         type={type}
         required
-        className="py-3 pl-10 block w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
         value={value}
         onChange={onChange}
+        className="py-3 pl-10 block w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
       />
     </div>
   </div>

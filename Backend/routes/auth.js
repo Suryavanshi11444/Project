@@ -24,7 +24,8 @@ router.post('/register', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = new Model({ name, email, password: hashedPassword });
+    // ✅ Save role explicitly
+    const user = new Model({ name, email, password: hashedPassword, role });
     await user.save();
 
     res.status(201).json({ message: `${role} registered successfully` });
@@ -56,17 +57,18 @@ router.post('/login', async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user._id, role },
-      process.env.JWT_SECRET,
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET || 'default-secret',
       { expiresIn: '1d' }
     );
 
+    // ✅ Clean user object (remove password) and include role
     const { password: _, ...userData } = user._doc;
 
     res.status(200).json({
       message: 'Login successful',
       token,
-      user: { ...userData, role }
+      user: userData
     });
   } catch (error) {
     console.error('Login Error:', error.message);
