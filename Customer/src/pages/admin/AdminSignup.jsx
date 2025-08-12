@@ -39,7 +39,7 @@ const AdminSignup = () => {
     try {
       // ✅ Register Admin
       await axios.post(
-        'http://localhost:5000/api/auth/register',
+        'https://project-hefx.vercel.app/api/auth/register',
         { name, email, password, role: 'admin' },
         {
           headers: { 'Content-Type': 'application/json' },
