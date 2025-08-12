@@ -12,28 +12,27 @@ connectDB();
 
 const app = express();
 
-// ✅ Define allowed origins (adjust for production)
-const allowedOrigins = ['http://localhost:5173'];
-
-// ✅ Proper CORS setup with credentials
+// ✅ CORS setup
 app.use(cors({
   origin: ["https://project-three-beta-njyppznuea.vercel.app", "http://localhost:5173"],
-  credentails: true,
+  credentials: true, // fixed spelling
 }));
 
-// ✅ Express middleware
-app.use(express.json()); // Parse JSON body
+// ✅ Middleware
+app.use(express.json());
 
-app.get("/", (req,res) => {
-  res.send("Backend is live and connected")
-})
+// ✅ Root route
+app.get("/", (req, res) => {
+  res.send("Backend is live and connected");
+});
+
 // ✅ Ensure uploads folder exists
 const uploadsDir = path.join(path.resolve(), 'uploads');
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir);
 }
 
-// ✅ Serve static uploads
+// ✅ Static uploads
 app.use('/uploads', express.static(uploadsDir));
 
 // ✅ API routes
@@ -46,8 +45,14 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Server error. Please try again later.' });
 });
 
-// ✅ Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-});
+
+// ✅ Local only
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
+  });
+}
+
+// ✅ Export for Vercel
+export default app;
