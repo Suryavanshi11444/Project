@@ -17,19 +17,16 @@ const allowedOrigins = ['http://localhost:5173'];
 
 // ✅ Proper CORS setup with credentials
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
+  origin: ["https://project-three-beta-njyppznuea.vercel.app", "http://localhost:5173"],
+  credentails: true,
 }));
 
 // ✅ Express middleware
 app.use(express.json()); // Parse JSON body
 
+app.get("/", (req,res) => {
+  res.send("Backend is live and connected")
+})
 // ✅ Ensure uploads folder exists
 const uploadsDir = path.join(path.resolve(), 'uploads');
 if (!fs.existsSync(uploadsDir)) {
